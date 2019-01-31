@@ -5,8 +5,13 @@ const bodyParser = require('body-parser')//Parser do corpo da requisição, sumb
 const express = require('express')//servidor que roda em cima do node.js
 const server = express()//baseado em um padrao chain of responsability
 
+const allowCors =require('./cors')
+
 server.use(bodyParser.urlencoded({extended: true }))//middleware para requisições submit
 server.use(bodyParser.json())//para requisições com corpo serializados em json
+
+server.use(allowCors)
+
 server.listen(port, function(){
     console.log(`BACKEND is running on port ${port}`)
 })
