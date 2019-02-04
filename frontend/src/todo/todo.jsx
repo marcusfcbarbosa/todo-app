@@ -1,7 +1,11 @@
 import React , {Component} from 'react'
+import axios from 'axios'
+
 import PageHeader from '../template/pageHeader'
 import TodoForm from './todoForm'
 import TodoList from './todoList'
+
+const URL = 'http://localhost:3003/api/todos'
 
 //Componente por classe
 export default class Todo extends Component{
@@ -16,7 +20,7 @@ export default class Todo extends Component{
     
     //a principio o this esta null
     handleAdd(){
-        console.log(this.state.description);
+        console.log("Estado atual : "+this.state.description);
     }
 
     handleChange(event){//evento
