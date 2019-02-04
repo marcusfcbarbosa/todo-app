@@ -9,23 +9,29 @@ import TodoList from './todoList'
 const URL = 'http://localhost:3003/api/todos'
 
 //Componente por classe
-export default class Todo extends Component{
-
+export default class Todo extends Component {
     constructor(props){
         super(props)
             this.state = { description:'', list:[] }
 
             this.handleAdd = this.handleAdd.bind(this)//Dessa forma o this, irá esta vinculado ao contexto de quem o chama
             this.handleChange = this.handleChange.bind(this)
+            this.handleRemove = this.handleRemove.bind(this)
 
             this.refresh()
     }
     
     refresh(){
+
         axios.get(`${URL}?sort=-createdAt`)
             .then((resp)=> this.setState({...this.state, description:'', list: resp.data}))
+            
     }
-    
+
+    handleRemove(todo){
+            axios.delete(`${URL}/${todo._id}`)
+                .then(resp => this.refresh())
+    }
     handleAdd(){
         const description = this.state.description
         axios.post(URL,{description})
@@ -46,7 +52,12 @@ export default class Todo extends Component{
                     handleAdd ={this.handleAdd}
                     handleChange={this.handleChange}
                 />
-                <TodoList />
+
+                <TodoList 
+                    list={this.state.list}
+                    handleRemove= {this.handleRemove}
+                />
+
             </div>
         )
     }
