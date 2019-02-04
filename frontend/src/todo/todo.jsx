@@ -1,5 +1,6 @@
 import React , {Component} from 'react'
-import axios from 'axios'
+import axios from 'axios'//usado para requisições HTTP
+//axios é baseado em promisses, ou seja, é assíncrono
 
 import PageHeader from '../template/pageHeader'
 import TodoForm from './todoForm'
@@ -18,9 +19,11 @@ export default class Todo extends Component{
             this.handleChange = this.handleChange.bind(this)
     }
     
-    //a principio o this esta null
+    
     handleAdd(){
-        console.log("Estado atual : "+this.state.description);
+        const description = this.state.description
+        axios.post(URL,{description})
+            .then(resp => console.log('Funcionou!!'))
     }
 
     handleChange(event){//evento
