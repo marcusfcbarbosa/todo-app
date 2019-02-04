@@ -17,8 +17,14 @@ export default class Todo extends Component{
 
             this.handleAdd = this.handleAdd.bind(this)//Dessa forma o this, irá esta vinculado ao contexto de quem o chama
             this.handleChange = this.handleChange.bind(this)
+
+            this.refresh()
     }
     
+    refresh(){
+        axios.get(`${URL}?sort=-createdAt`)
+            .then((resp)=> console.log(resp.data))
+    }
     
     handleAdd(){
         const description = this.state.description
