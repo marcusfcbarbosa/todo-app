@@ -3,12 +3,17 @@ import PageHeader from '../template/pageHeader'
 import TodoForm from './todoForm'
 import TodoList from './todoList'
 
-
 //Componente por classe
 export default class Todo extends Component{
 
+    constructor(props){
+        super(props)
+            this.handleAdd = this.handleAdd.bind(this)//Dessa forma o this, irá esta vinculado ao contexto de quem o chama
+    }
+    
+    //a principio o this esta null
     handleAdd(){
-        console.log('ok');
+        console.log(this);
     }
 
     render(){
