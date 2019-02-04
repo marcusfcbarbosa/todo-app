@@ -23,13 +23,13 @@ export default class Todo extends Component{
     
     refresh(){
         axios.get(`${URL}?sort=-createdAt`)
-            .then((resp)=> console.log(resp.data))
+            .then((resp)=> this.setState({...this.state, description:'', list: resp.data}))
     }
     
     handleAdd(){
         const description = this.state.description
         axios.post(URL,{description})
-            .then(resp => console.log('Funcionou!!'))
+            .then(resp => this.refresh())
     }
 
     handleChange(event){//evento
