@@ -1,8 +1,14 @@
 import React  from 'react'
+
+import { connect } from 'react-redux'//conecta esse componente com a Store e com as Actions
+
 import IconButton from '../template/iconButton'
 import iconButton from '../template/iconButton';
 
-export default props =>{
+
+
+const TodoList = props =>{
+
     const renderRows =() =>{
         const list = props.list || []
         //foreach de uma lista
@@ -40,3 +46,11 @@ export default props =>{
         </table>   
     )
 }
+
+// 1- criar um método que vai mapear o estado do Redux, com as propriedades do meu objeto
+//do estado, somente pego a lista, pois nesse componente só me interessa ela
+const mapStateToProps = state =>({
+    list: state.todo.list
+})
+
+export default connect(mapStateToProps)(TodoList)

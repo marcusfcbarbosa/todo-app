@@ -77,7 +77,7 @@ export default class Todo extends Component {
                 />
 
                 <TodoList
-                    list={this.state.list}
+                    
                     handleRemove= {this.handleRemove}
                     handleMarkAsDone = {this.handleMarkAsDone}
                     handleMarkAsPending = {this.handleMarkAsPending}
@@ -86,3 +86,5 @@ export default class Todo extends Component {
         )
     }
 }
+//Como foi conectado o reducer no componente TodoList, nao preciso mais passar o estado para dentro do
+//componente  (TodoList) list={this.state.list}

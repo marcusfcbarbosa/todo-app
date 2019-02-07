@@ -1,8 +1,5 @@
 import { combineReducers } from  'redux'
 
-
-
-
 const RootReducer = combineReducers({
     todo: ()=>({
         description:'Teste 1',
@@ -22,6 +19,5 @@ const RootReducer = combineReducers({
     ]
     })
 })
-
 
 export default RootReducer
