@@ -1,8 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 
 import Grid from '../template/grid'
 import IconButton from '../template/iconButton'
+//necessita fazer um binding de changeDescription com TodoForm
+//Após o binding o evento changeDescription, aparece dentro das props do Componente
+import { changeDescription } from './todoActions'
 
 const TodoForm = props => {
     const keyHandler = (e) => {
@@ -18,9 +23,9 @@ const TodoForm = props => {
             <Grid cols='12 9 10'>
                 <input id='description' className='form-control'
                     placeholder='Adicione uma tarefa'
-                    onChange={props.handleChange}
-                    onKeyUp={keyHandler}
-                    value={props.description}></input>
+                    onChange={ props.changeDescription}//Esse método foi criado la na Action Creator
+                    onKeyUp={ keyHandler}
+                    value= { props.description } ></input>
             </Grid>
             <Grid cols='12 3 2'>
                 <IconButton style='primary' icon='plus'
@@ -38,4 +43,9 @@ const mapStateToProps = state =>({
     description: state.todo.description
 })
 
-export default connect(mapStateToProps)(TodoForm)
+// 2- darum binding com o Action Creator changeDescription
+//dispatch = é quem dispara as ações
+const mapDispatchToPropos = dispatch => bindActionCreators(
+    { changeDescription },
+    dispatch)
+export default connect(mapStateToProps,mapDispatchToPropos)(TodoForm)
