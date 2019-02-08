@@ -1,5 +1,6 @@
 import { combineReducers } from  'redux'
 
+//A principio o estado que esta no Reducer se encontra fixo
 const RootReducer = combineReducers({
     todo: ()=>({
         description:'Lendo o que esta dentro do Reducer',
