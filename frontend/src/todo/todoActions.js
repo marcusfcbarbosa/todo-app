@@ -1,8 +1,23 @@
-//ActionCreator, representam os eventos que sao disparados no componente
-//Lembrando que toda ActionCreator tera um atributo chamado type
-//Por padrão o retorno de um action creator é um payload
-//Após isso, necessita fazer um binding com o compoente que no qual o evento será disparado
+//lib para requisições http
+import axios from 'axios'
+
+const URL = 'http://localhost:3003/api/todos'
+
+
+//evento do TodoForm
 export const changeDescription = (event) => ({
     type:'DESCRIPTION_CHANGED',
     payload: event.target.value
 })
+
+// O axios, é uma função assincrona, dessa forma necessita do .then
+// axios.get(`${URL}?sort=-createdAt`)
+//             .then(resp => this.setState({...this.state, description, list: resp.data}))
+// A Ation, é uma função sincrona, entao para que ele tenha acesso ao ".data" necessita de um middleware
+export const search = () =>{
+    const request = axios.get(`${URL}?sort=-createdAt`)
+    return{
+        type:'TODO_SEARCH',
+        payload:request
+    }
+}
