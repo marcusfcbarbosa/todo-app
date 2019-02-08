@@ -15,9 +15,7 @@ const INITIAL_STATE = {
         },
     ]
 }
-
 //Um reducer sempre recebe o estado atual e uma action
-
 export default (state = INITIAL_STATE, action ) =>{
     switch(action.type){
         case 'DESCRIPTION_CHANGED':
