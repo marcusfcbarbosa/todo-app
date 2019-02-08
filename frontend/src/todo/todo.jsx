@@ -69,7 +69,7 @@ export default class Todo extends Component {
                 <PageHeader name="Tarefas" small="Cadastro"></PageHeader>
                 
                 <TodoForm
-                    description = { this.state.description }
+                    
                     handleAdd = {this.handleAdd}
                     handleChange= {this.handleChange}
                     handleSearch = {this.handleSearch}
@@ -88,3 +88,4 @@ export default class Todo extends Component {
 }
 //Como foi conectado o reducer no componente TodoList, nao preciso mais passar o estado para dentro do
 //componente  (TodoList) list={this.state.list}
+//TodoForm description = { this.state.description }

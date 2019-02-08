@@ -2,7 +2,7 @@ import { combineReducers } from  'redux'
 
 const RootReducer = combineReducers({
     todo: ()=>({
-        description:'Teste 1',
+        description:'Lendo o que esta dentro do Reducer',
         list:[{
             _id:1,
             description:'Teste 1.1',
