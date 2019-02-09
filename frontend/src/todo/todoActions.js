@@ -5,7 +5,7 @@ const URL = 'http://localhost:3003/api/todos'
 
 
 //evento do TodoForm
-export const changeDescription = (event) => ({
+export const changeDescription = event => ({
     type:'DESCRIPTION_CHANGED',
     payload: event.target.value
 })
@@ -13,9 +13,10 @@ export const changeDescription = (event) => ({
 // O axios, é uma função assincrona, dessa forma necessita do .then
 // axios.get(`${URL}?sort=-createdAt`)
 //             .then(resp => this.setState({...this.state, description, list: resp.data}))
-// A Ation, é uma função sincrona, entao para que ele tenha acesso ao ".data" necessita de um middleware
+// A Action é uma função sincrona, entao para que ele tenha acesso ao ".data" necessita de um middleware
 export const search = () =>{
     const request = axios.get(`${URL}?sort=-createdAt`)
+
     return{
         type:'TODO_SEARCH',
         payload:request
