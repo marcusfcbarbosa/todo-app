@@ -16,7 +16,6 @@ export const changeDescription = event => ({
 // A Action é uma função sincrona, entao para que ele tenha acesso ao ".data" necessita de um middleware
 export const search = () =>{
     const request = axios.get(`${URL}?sort=-createdAt`)
-
     return{
         type:'TODO_SEARCH',
         payload:request
