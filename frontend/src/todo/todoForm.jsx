@@ -6,7 +6,7 @@ import Grid from '../template/grid'
 import IconButton from '../template/iconButton'
 //necessita fazer um binding de changeDescription com TodoForm
 //Após o binding o evento changeDescription, aparece dentro das props do Componente
-import { changeDescription, search } from './todoActions'
+import { changeDescription, search, add } from './todoActions'
 
 class TodoForm extends Component {
     constructor(props){
@@ -23,14 +23,18 @@ class TodoForm extends Component {
     }
 
     keyHandler(e){
+        //extraindo os tres atributos de props
+        const { add, search , description } = this.props
+
         if (e.key === 'Enter') {
-            e.shiftKey ? this.props.handleSearch() : this.props.handleAdd()
+            e.shiftKey ? handleSearch() : add(description)
         } else if (e.key === 'Escape') {
             props.handleClear()
         }
     }
 
    render(){
+       const { add, search , description } = this.props
        return(
         <div role='form' className='todoForm'>
                     <Grid cols='12 9 10'>
@@ -42,16 +46,14 @@ class TodoForm extends Component {
                     </Grid>
                     <Grid cols='12 3 2'>
                             <IconButton style='primary' icon='plus'
-                            onClick={this.props.handleAdd}></IconButton>
+                            onClick={()=> add(description)}></IconButton>
                         <IconButton style='info' icon='search'
-                            onClick={this.props.handleSearch}></IconButton>
+                            onClick={()=>search()}></IconButton>
                         <IconButton style='default' icon='close'
                             onClick={ this.props.handleClear}></IconButton>
                     </Grid>
         </div>
-
        )
-        
     }
 }
 
@@ -64,6 +66,6 @@ const mapStateToProps = state =>({
 // 2- darum binding com o Action Creator changeDescription
 //dispatch = é quem dispara as ações
 const mapDispatchToPropos = dispatch => bindActionCreators(
-    { changeDescription, search },
+    { changeDescription, search, add },
     dispatch)
 export default connect(mapStateToProps,mapDispatchToPropos)(TodoForm)
