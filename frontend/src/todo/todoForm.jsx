@@ -6,7 +6,7 @@ import Grid from '../template/grid'
 import IconButton from '../template/iconButton'
 //necessita fazer um binding de changeDescription com TodoForm
 //Após o binding o evento changeDescription, aparece dentro das props do Componente
-import { changeDescription, search, add } from './todoActions'
+import { changeDescription, search, add, addComThunk } from './todoActions'
 
 class TodoForm extends Component {
     constructor(props){
@@ -24,7 +24,7 @@ class TodoForm extends Component {
 
     keyHandler(e){
         //extraindo os tres atributos de props
-        const { add, search , description } = this.props
+        const { addComThunk,add, search , description } = this.props
 
         if (e.key === 'Enter') {
             e.shiftKey ? handleSearch() : add(description)
@@ -34,7 +34,7 @@ class TodoForm extends Component {
     }
 
    render(){
-       const { add, search , description } = this.props
+       const { addComThunk, add, search , description } = this.props
        return(
         <div role='form' className='todoForm'>
                     <Grid cols='12 9 10'>
@@ -46,7 +46,7 @@ class TodoForm extends Component {
                     </Grid>
                     <Grid cols='12 3 2'>
                             <IconButton style='primary' icon='plus'
-                            onClick={()=> add(description)}></IconButton>
+                            onClick={()=> addComThunk(description)}></IconButton>
                         <IconButton style='info' icon='search'
                             onClick={()=>search()}></IconButton>
                         <IconButton style='default' icon='close'
@@ -66,6 +66,6 @@ const mapStateToProps = state =>({
 // 2- darum binding com o Action Creator changeDescription
 //dispatch = é quem dispara as ações
 const mapDispatchToPropos = dispatch => bindActionCreators(
-    { changeDescription, search, add },
+    { changeDescription, search, add,addComThunk },
     dispatch)
 export default connect(mapStateToProps,mapDispatchToPropos)(TodoForm)
