@@ -27,7 +27,7 @@ class TodoForm extends Component {
         const { addComThunk,add, search , description } = this.props
 
         if (e.key === 'Enter') {
-            e.shiftKey ? handleSearch(description) : addComThunk(description)
+            e.shiftKey ? handleSearch() : addComThunk(description)
         } else if (e.key === 'Escape') {
             props.clear()
         }
@@ -48,7 +48,7 @@ class TodoForm extends Component {
                             <IconButton style='primary' icon='plus'
                             onClick={()=> addComThunk(description)}></IconButton>
                         <IconButton style='info' icon='search'
-                            onClick={()=>search(description)}></IconButton>
+                            onClick={()=>search()}></IconButton>
                         <IconButton style='default' icon='close'
                             onClick={ this.props.clear}></IconButton>
                     </Grid>

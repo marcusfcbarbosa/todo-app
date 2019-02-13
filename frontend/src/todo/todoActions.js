@@ -31,7 +31,8 @@ export const search = () =>{
         const description = getState().todo.description
         const search = description ? `&description__regex=/${description}/` : ''
         const request =axios.get(`${URL}?sort=-createdAt${search}`)
-            .then(resp => dispatch({type:'TODO_SEARCH',payload: resp.data}))
+            .then(resp => dispatch({type:'TODO_SEARCH', payload: resp.data}))
+            .then(resp => dispatch(clear()))
     } 
 }
 
