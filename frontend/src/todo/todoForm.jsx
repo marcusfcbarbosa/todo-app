@@ -6,7 +6,7 @@ import Grid from '../template/grid'
 import IconButton from '../template/iconButton'
 //necessita fazer um binding de changeDescription com TodoForm
 //Após o binding o evento changeDescription, aparece dentro das props do Componente
-import { changeDescription, search, add, addComThunk } from './todoActions'
+import { changeDescription, search, add, addComThunk ,clear} from './todoActions'
 
 class TodoForm extends Component {
     constructor(props){
@@ -27,9 +27,9 @@ class TodoForm extends Component {
         const { addComThunk,add, search , description } = this.props
 
         if (e.key === 'Enter') {
-            e.shiftKey ? handleSearch() : add(description)
+            e.shiftKey ? handleSearch(description) : addComThunk(description)
         } else if (e.key === 'Escape') {
-            props.handleClear()
+            props.clear()
         }
     }
 
@@ -48,9 +48,9 @@ class TodoForm extends Component {
                             <IconButton style='primary' icon='plus'
                             onClick={()=> addComThunk(description)}></IconButton>
                         <IconButton style='info' icon='search'
-                            onClick={()=>search()}></IconButton>
+                            onClick={()=>search(description)}></IconButton>
                         <IconButton style='default' icon='close'
-                            onClick={ this.props.handleClear}></IconButton>
+                            onClick={ this.props.clear}></IconButton>
                     </Grid>
         </div>
        )
@@ -66,6 +66,6 @@ const mapStateToProps = state =>({
 // 2- darum binding com o Action Creator changeDescription
 //dispatch = é quem dispara as ações
 const mapDispatchToPropos = dispatch => bindActionCreators(
-    { changeDescription, search, add,addComThunk },
+    { changeDescription, search, add,addComThunk ,clear},
     dispatch)
 export default connect(mapStateToProps,mapDispatchToPropos)(TodoForm)

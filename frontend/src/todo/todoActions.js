@@ -15,8 +15,9 @@ export const changeDescription = event => ({
 //             .then(resp => this.setState({...this.state, description, list: resp.data}))
 // A Action é uma função sincrona, entao para que ele tenha acesso ao ".data" necessita de um middleware
 
-export const search = () =>{
-    const request = axios.get(`${URL}?sort=-createdAt`)
+export const search = (description ='') =>{
+    const search = description ? `&description__regex=/${description}/` : ''
+    const request =axios.get(`${URL}?sort=-createdAt${search}`)
     return{
         type:'TODO_SEARCH',
         payload:request
@@ -28,7 +29,7 @@ export const search = () =>{
 export const add =(description) =>{
     const request = axios.post(URL,{ description })
     return [
-        {type:'TODO_ADDED',payload:request},
+        {type:'TODO_CLEAR',payload:request},
         search()
     ]
 }
@@ -38,7 +39,36 @@ export const add =(description) =>{
 export const addComThunk =(description) =>{
     return dispatch =>{
         axios.post(URL,{ description })
-            .then(resp => dispatch({type:'TODO_ADDED', payload : resp.data }))
+            .then(resp => dispatch(clear()))
             .then(resp => dispatch(search()))
+    }
+}
+
+//redux-thunk cria uma action que retonra um metodo que que recebe como parametro um dispatch
+export const markAsDone =(todo) =>{
+    return dispatch =>{
+        axios.put(`${URL}/${todo._id}`, { ...todo, done:true })
+                .then(resp => dispatch(search()))
+    } 
+}
+
+export const markAsPending =(todo) => {
+    return dispatch =>{
+        axios.put(`${URL}/${todo._id}`, { ...todo, done:false })
+        .then(resp => dispatch(search()))
+    }
+}
+
+export const remove =(todo) =>{
+    return dispatch =>{
+        axios.delete(`${URL}/${todo._id}`)
+            .then(resp => dispatch(search()))
+    }
+}
+
+export const clear = () =>{
+    return{
+        type:'TODO_CLEAR',
+        payload:''
     }
 }
