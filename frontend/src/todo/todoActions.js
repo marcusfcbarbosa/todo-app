@@ -14,14 +14,25 @@ export const changeDescription = event => ({
 // axios.get(`${URL}?sort=-createdAt`)
 //             .then(resp => this.setState({...this.state, description, list: resp.data}))
 // A Action é uma função sincrona, entao para que ele tenha acesso ao ".data" necessita de um middleware
+// export const search = (description ='') =>{
+//     const search = description ? `&description__regex=/${description}/` : ''
+//     const request =axios.get(`${URL}?sort=-createdAt${search}`)
+//     return{
+//         type:'TODO_SEARCH',
+//         payload:request
+//     }
+// }
 
-export const search = (description ='') =>{
-    const search = description ? `&description__regex=/${description}/` : ''
-    const request =axios.get(`${URL}?sort=-createdAt${search}`)
-    return{
-        type:'TODO_SEARCH',
-        payload:request
-    }
+
+
+//Utilizando o redux-thnuk, ele tbm tem acesso ao estado do componente que o chama
+export const search = () =>{
+    return(dispatch, getState) =>{
+        const description = getState().todo.description
+        const search = description ? `&description__regex=/${description}/` : ''
+        const request =axios.get(`${URL}?sort=-createdAt${search}`)
+            .then(resp => dispatch({type:'TODO_SEARCH',payload: resp.data}))
+    } 
 }
 
 
